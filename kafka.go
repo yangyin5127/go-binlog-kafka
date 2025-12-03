@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/Shopify/sarama"
-	"github.com/feiin/go-binlog-kafka/logger"
+	"github.com/yangyin5127/go-binlog-kafka/logger"
 )
 
 var (

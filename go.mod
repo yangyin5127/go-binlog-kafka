@@ -1,15 +1,15 @@
-module github.com/feiin/go-binlog-kafka
+module github.com/yangyin5127/go-binlog-kafka
 
 go 1.22
 
 require (
 	github.com/Shopify/sarama v1.29.0
-	github.com/feiin/ploto v0.5.1
 	github.com/go-mysql-org/go-mysql v1.10.0
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/pingcap/tidb v0.0.0-20221126021158-6b02a5d8ba7d
 	github.com/pingcap/tidb/parser v0.0.0-20221126021158-6b02a5d8ba7d
 	github.com/rs/zerolog v1.29.1
+	github.com/yangyin5127/ploto v0.6.1
 
 )
 
@@ -23,7 +23,6 @@ require (
 	github.com/eapache/go-resiliency v1.2.0 // indirect
 	github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 // indirect
 	github.com/eapache/queue v1.1.0 // indirect
-	github.com/feiin/sqlstring v0.3.0 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
@@ -66,6 +65,7 @@ require (
 	github.com/tikv/pd/client v0.0.0-20220307081149-841fa61e9710 // indirect
 	github.com/uber/jaeger-client-go v2.22.1+incompatible // indirect
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
+	github.com/yangyin5127/sqlstring v0.3.1 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/feiin/go-binlog-kafka/db"
-	"github.com/feiin/go-binlog-kafka/logger"
+	"go-binlog-kafka/db"
+	"go-binlog-kafka/logger"
 
 	"github.com/go-mysql-org/go-mysql/mysql"
 	"github.com/go-mysql-org/go-mysql/replication"

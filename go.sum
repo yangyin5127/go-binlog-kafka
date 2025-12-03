@@ -141,10 +141,6 @@ github.com/envoyproxy/go-control-plane v0.9.10-0.20210907150352-cf90f659a021/go.
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/fatih/color v1.13.0 h1:8LOYc1KYPPmyKMuN8QV2DNRWNbLo6LZ0iLs8+mlH53w=
 github.com/fatih/color v1.13.0/go.mod h1:kLAiJbzzSOZDVNGyDpeOxJ47H46qBXwg5ILebYFFOfk=
-github.com/feiin/ploto v0.5.1 h1:2GnDB5xHEYQ7fQwz4EbmT/hLkb0SPSRDuYeCjU6W91M=
-github.com/feiin/ploto v0.5.1/go.mod h1:1AAZb+pZZsjGzmIUqN0s5x0Qq8rX6M1cytCN4xoS28w=
-github.com/feiin/sqlstring v0.3.0 h1:iyPEFijI2BxpY2M+AuhIvdNManzXa2OwGzuPaEMLUgo=
-github.com/feiin/sqlstring v0.3.0/go.mod h1:xpZTjVUw1nD3hMgF9SMRdPiooKSikLf4PS5j2NTn3RI=
 github.com/fortytw2/leaktest v1.3.0 h1:u8491cBMTQ8ft8aeV+adlcytMZylmA5nnwwkRZjI8vw=
 github.com/fortytw2/leaktest v1.3.0/go.mod h1:jDsjWgpAGjm2CA7WthBh/CdZYEPF31XHquHwclZch5g=
 github.com/frankban/quicktest v1.11.3 h1:8sXhOn0uLys67V8EsXLc6eszDs8VXWxL3iRvebPhedY=
@@ -481,6 +477,10 @@ github.com/wangjohn/quickselect v0.0.0-20161129230411-ed8402a42d5f h1:9DDCDwOyEy
 github.com/wangjohn/quickselect v0.0.0-20161129230411-ed8402a42d5f/go.mod h1:8sdOQnirw1PrcnTJYkmW1iOHtUmblMmGdUOHyWYycLI=
 github.com/xdg/scram v1.0.3/go.mod h1:lB8K/P019DLNhemzwFU4jHLhdvlE6uDZjXFejJXr49I=
 github.com/xdg/stringprep v1.0.3/go.mod h1:Jhud4/sHMO4oL310DaZAKk9ZaJ08SJfe+sJh0HrGL1Y=
+github.com/yangyin5127/ploto v0.6.1 h1:9/tLUHDQ9EcA9kx6b4lWYcQgpyKYYfyeIJF4Hh0L/vo=
+github.com/yangyin5127/ploto v0.6.1/go.mod h1:FR+xSo3ZvIB0SYpQNrJ/aluKtmNNe9EhYF8vcN3K6As=
+github.com/yangyin5127/sqlstring v0.3.1 h1:09JyniUyaHj7SqQXmPJRoKZbpzRmDjYU+yUqXI+EMbQ=
+github.com/yangyin5127/sqlstring v0.3.1/go.mod h1:PZ2ADJdPOKgw8QmxTtWcEMO+UDet7WBKgEBKhVZn5AU=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.32/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=

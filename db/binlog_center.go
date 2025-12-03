@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/feiin/go-binlog-kafka/logger"
+	"go-binlog-kafka/logger"
 )
 
 var binlogInfoStoreType string
