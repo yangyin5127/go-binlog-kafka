@@ -4,7 +4,7 @@ A simple MySQL tool for syncing BinLog to Kafka with JSON format
 
 一个将 binlog 解析为 json 并 push 到 kafka 消息队列简单工具
 
-[Postgres 实现版本](https://github.com/feiin/pg-replication-kafka)
+[Postgres 实现版本](https://github.com/yangyin5127/pg-replication-kafka)
 
 ## Getting Started
 
