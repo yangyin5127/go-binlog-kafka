@@ -306,15 +306,15 @@ func pushDataToKafka(ctx context.Context, eventRowList []RowData, kafkaTopicName
 
 func isIgnoreTable(ctx context.Context, schema, table string) bool {
 	if strings.HasPrefix(table, "_") && strings.HasSuffix(table, "_del") {
-		logger.Info(ctx).Str("table", table).Msg("ingore table")
+		logger.Info(ctx).Str("table", table).Msg("ignore table")
 		return true
 	}
 	if strings.HasPrefix(table, "_") && strings.HasSuffix(table, "_gho") {
-		logger.Info(ctx).Str("table", table).Msg("ingore table")
+		logger.Info(ctx).Str("table", table).Msg("ignore table")
 		return true
 	}
 	if strings.HasPrefix(table, "_") && strings.HasSuffix(table, "_ghc") {
-		logger.Info(ctx).Str("table", table).Msg("ingore table")
+		logger.Info(ctx).Str("table", table).Msg("ignore table")
 		return true
 	}
 	return false

@@ -9,8 +9,6 @@ import (
 	"sync"
 	"time"
 
-	"runtime"
-
 	"github.com/yangyin5127/go-binlog-kafka/logger"
 )
 
@@ -246,14 +244,6 @@ func flushBinlogInfoToFile(ctx context.Context, instanceName string, posInfo *Bi
 	}
 
 	tmpFile.Close()
-
-	if runtime.GOOS == "windows" {
-		// Windows下需要先删除目标文件才能重命名
-		_, err = os.Stat(fpath)
-		if err == nil {
-			_ = os.Remove(fpath)
-		}
-	}
 
 	// 原子重命名
 	err = os.Rename(tmpPath, fpath)
