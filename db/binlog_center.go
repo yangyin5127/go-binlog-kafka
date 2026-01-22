@@ -248,7 +248,6 @@ func flushBinlogInfoToFile(ctx context.Context, instanceName string, posInfo *Bi
 	// 原子重命名
 	err = os.Rename(tmpPath, fpath)
 	if err != nil {
-		_ = os.Remove(tmpPath)
 		logger.ErrorWith(ctx, err).Msg("flushBinlogInfoToFile rename error")
 		return err
 	}
