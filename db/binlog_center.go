@@ -22,6 +22,7 @@ var (
 	flushInterval     = 5 * time.Second // 默认5秒刷盘一次
 	stopFlushChan     chan struct{}
 	flushOnce         sync.Once
+	flushWG           sync.WaitGroup
 )
 
 type BinLogCenterInfo struct {
@@ -56,7 +57,9 @@ func InitFileStore(flushIntervalSeconds int) {
 		stopFlushChan = make(chan struct{})
 		flushTicker = time.NewTicker(flushInterval)
 
+		flushWG.Add(1)
 		go func() {
+			defer flushWG.Done()
 			for {
 				select {
 				case <-flushTicker.C:
@@ -77,7 +80,9 @@ func InitFileStore(flushIntervalSeconds int) {
 func StopFileStore() {
 	if stopFlushChan != nil {
 		close(stopFlushChan)
+		flushWG.Wait()
 	}
+
 }
 
 // FlushBinlogInfo 强制立即刷盘（触发式）
@@ -274,6 +279,13 @@ func getBinlogInfoFromFile(ctx context.Context, instanceName string) (*BinLogCen
 	if os.IsNotExist(err) {
 		logger.Warn(ctx).Msg("getBinlogInfoFromFile file not exist")
 		return nil, nil
+	}
+
+	tpath := fpath + ".tmp"
+	_, err = os.Stat(tpath)
+	if err == nil {
+		logger.Warn(ctx).Msgf("found unfinished checkpoint file %s please inspect manually!", tpath)
+		return nil, fmt.Errorf("found unfinished checkpoint file %s please inspect manually or remove it!", tpath)
 	}
 
 	f, err := os.Open(fpath)

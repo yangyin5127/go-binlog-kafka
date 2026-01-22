@@ -127,5 +127,4 @@ func main() {
 	}
 
 	logger.Info(ctx).Msg("replication exited")
-	time.Sleep(2 * time.Second)
 }
