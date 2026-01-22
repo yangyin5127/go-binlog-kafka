@@ -95,6 +95,7 @@ push_msg_mode=single 模式时,会将每条 JSON 单独推送至配置的 kafka 
 - push_msg_mode 推送消息模式，默认`array`,可选`single`. `array`会将短时间内多条数据变更合并成数组推送至 kafka;`single`会将每条数据变更 JSON 单独推送至 kafka
 - batch_max_rows 当 push_msg_mode 为`array`时，合并数据变更的最大行数，默认 10;
 - store_meta_data 当 store_meta_data 为 true 时，表结构会存储至 meta_data 字段;
+- flush_interval 定时保存pos信息间隔，默认 5 秒;
 
 ### meta 保存表结构信息
 

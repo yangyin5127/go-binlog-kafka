@@ -69,8 +69,6 @@ func main() {
 
 	if *metaStoreType == "file" {
 		db.InitFileStore(*flushInterval)
-		defer db.StopFileStore()
-		logger.Info(ctx).Int("flush_interval", *flushInterval).Msg("File store initialized with periodic flush")
 	}
 
 	binlogCenterPos, err := db.GetReplicationPos(ctx, *dbInstanceName)
@@ -124,5 +122,10 @@ func main() {
 		panic(err)
 	}
 
+	if *metaStoreType == "file" {
+		db.StopFileStore()
+	}
+
 	logger.Info(ctx).Msg("replication exited")
+	time.Sleep(2 * time.Second)
 }

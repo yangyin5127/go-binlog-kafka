@@ -53,11 +53,13 @@ func (r *Replicator) Run(ctx context.Context) error {
 
 		if pushToKafka && len(eventRowList) > 0 {
 			if err := r.flushBatch(ctx, eventRowList, forceSavePos); err != nil {
+				logger.ErrorWith(ctx, err).Msg("Replicator flushBatch error")
 				return err
 			}
 			eventRowList = eventRowList[:0]
 		}
 
+		// reset rowData
 		rowData.AfterValues = nil
 		rowData.Values = nil
 		rowData.BeforeValues = nil
@@ -74,6 +76,7 @@ func (r *Replicator) Run(ctx context.Context) error {
 			if errors.Is(err, context.Canceled) {
 				return r.flushAndExit(ctx, eventRowList)
 			}
+			logger.ErrorWith(ctx, err).Msg("Replicator fetchEvent error")
 			return err
 		}
 
@@ -85,6 +88,7 @@ func (r *Replicator) Run(ctx context.Context) error {
 			rowsEvent := ev.Event.(*replication.RowsEvent)
 			columns, updateMeta, err := db.GetMysqlTableColumns(rowData.Schema, rowData.Table)
 			if err != nil {
+				logger.ErrorWith(ctx, err).Msg("replication.WRITE_ROWS_EVENT GetMysqlTableColumns error")
 				return err
 			}
 			forceSavePos = updateMeta
@@ -114,6 +118,7 @@ func (r *Replicator) Run(ctx context.Context) error {
 			rowsEvent := ev.Event.(*replication.RowsEvent)
 			columns, updateMeta, err := db.GetMysqlTableColumns(rowData.Schema, rowData.Table)
 			if err != nil {
+				logger.ErrorWith(ctx, err).Msg("replication.UPDATE_ROWS_EVENT GetMysqlTableColumns error")
 				return err
 			}
 			forceSavePos = updateMeta
@@ -157,6 +162,7 @@ func (r *Replicator) Run(ctx context.Context) error {
 			rowsEvent := ev.Event.(*replication.RowsEvent)
 			columns, updateMeta, err := db.GetMysqlTableColumns(rowData.Schema, rowData.Table)
 			if err != nil {
+				logger.ErrorWith(ctx, err).Msg("replication.DELETE_ROWS_EVENT GetMysqlTableColumns error")
 				return err
 			}
 			forceSavePos = updateMeta
