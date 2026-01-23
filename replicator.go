@@ -51,6 +51,14 @@ func (r *Replicator) Run(ctx context.Context) error {
 			pushToKafka = true
 		}
 
+		if len(eventRowList) == 0 && forceSavePos && len(rowData.Gtid) > 0 && len(rowData.BinLogFile) > 0 {
+			// update gtid/pos even no data
+			err := r.UpdateReplicationPos(ctx, rowData.LogPos, rowData.Gtid, rowData.BinLogFile)
+			if err != nil {
+				logger.ErrorWith(ctx, err).Str("gtid", rowData.Gtid).Str("binlogFile", rowData.BinLogFile).Msg("Replicator UpdateReplicationPos error")
+			}
+		}
+
 		if pushToKafka && len(eventRowList) > 0 {
 			if err := r.flushBatch(ctx, eventRowList, forceSavePos); err != nil {
 				logger.ErrorWith(ctx, err).Msg("Replicator flushBatch error")
@@ -165,9 +173,6 @@ func (r *Replicator) Run(ctx context.Context) error {
 					eventRowList = append(eventRowList, rowData)
 				}
 			}
-			if r.IsSingleMode {
-				forceSavePos = true
-			}
 
 		case replication.DELETE_ROWS_EVENTv2, replication.DELETE_ROWS_EVENTv1:
 			rowsEvent := ev.Event.(*replication.RowsEvent)
@@ -246,6 +251,7 @@ func (r *Replicator) Run(ctx context.Context) error {
 
 		case replication.ROTATE_EVENT:
 			rowData.BinLogFile = string(ev.Event.(*replication.RotateEvent).NextLogName)
+			forceSavePos = true
 		default:
 		}
 	}
@@ -278,6 +284,13 @@ func (r *Replicator) flushBatch(ctx context.Context, events []RowData, forceSave
 		if err := db.FlushBinlogInfo(ctx, r.DBInstance); err != nil {
 			logger.ErrorWith(ctx, err).Msg("FlushBinlogInfo error")
 		}
+	}
+	return nil
+}
+
+func (r *Replicator) UpdateReplicationPos(ctx context.Context, logPos uint32, gtid, binlogFile string) error {
+	if err := db.SaveReplicationPos(ctx, r.DBInstance, logPos, gtid, binlogFile, r.StoreMetaData); err != nil {
+		return err
 	}
 	return nil
 }
