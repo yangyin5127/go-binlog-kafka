@@ -301,6 +301,17 @@ func getBinlogInfoFromFile(ctx context.Context, instanceName string) (*BinLogCen
 		logger.ErrorWith(ctx, err).Msg("getBinlogInfoFromFile json decode error")
 		return nil, err
 	}
+
+	for schema, tableInfo := range binlogInfo.MetaData {
+		for table, columns := range tableInfo {
+
+			// At startup, clear the tables that have no columns to ensure that later logic can fetch the latest table structure from the source database.
+			if len(columns) == 0 {
+				delete(binlogInfo.MetaData[schema], table)
+			}
+		}
+
+	}
 	return &binlogInfo, nil
 }
 
