@@ -91,6 +91,11 @@ func (r *Replicator) Run(ctx context.Context) error {
 				logger.ErrorWith(ctx, err).Msg("replication.WRITE_ROWS_EVENT GetMysqlTableColumns error")
 				return err
 			}
+			if len(columns) == 0 {
+				// can't get columns info, skip
+				continue
+			}
+
 			forceSavePos = updateMeta
 
 			rowData.Action = "insert"
@@ -121,6 +126,12 @@ func (r *Replicator) Run(ctx context.Context) error {
 				logger.ErrorWith(ctx, err).Msg("replication.UPDATE_ROWS_EVENT GetMysqlTableColumns error")
 				return err
 			}
+
+			if len(columns) == 0 {
+				// can't get columns info, skip
+				continue
+			}
+
 			forceSavePos = updateMeta
 
 			rowData.Action = "update"
@@ -165,6 +176,12 @@ func (r *Replicator) Run(ctx context.Context) error {
 				logger.ErrorWith(ctx, err).Msg("replication.DELETE_ROWS_EVENT GetMysqlTableColumns error")
 				return err
 			}
+
+			if len(columns) == 0 {
+				// can't get columns info, skip
+				continue
+			}
+
 			forceSavePos = updateMeta
 
 			rowData.Action = "delete"
