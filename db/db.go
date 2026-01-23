@@ -1,8 +1,8 @@
 package db
 
 import (
-	"github.com/yangyin5127/ploto"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/yangyin5127/ploto"
 )
 
 var metaDataMap = make(map[string]map[string][]string)
@@ -87,9 +87,16 @@ func GetMysqlTableColumns(schema string, table string) (columns []string, metaFr
 		for _, v := range tableColumns {
 			metaDataMap[schema][table] = append(metaDataMap[schema][table], v.Column_name)
 		}
+
+		if len(tableColumns) == 0 {
+			// cache empty columns to avoid repeated queries
+			metaDataMap[schema][table] = []string{}
+		}
 	}
 
-	columns = append(columns, metaDataMap[schema][table]...)
+	if len(metaDataMap[schema][table]) > 0 {
+		columns = append(columns, metaDataMap[schema][table]...)
+	}
 
 	return columns, metaFromMaster, nil
 }
