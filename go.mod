@@ -1,6 +1,6 @@
 module github.com/yangyin5127/go-binlog-kafka
 
-go 1.22
+go 1.26
 
 require (
 	github.com/Shopify/sarama v1.29.0
@@ -9,8 +9,7 @@ require (
 	github.com/pingcap/tidb v0.0.0-20221126021158-6b02a5d8ba7d
 	github.com/pingcap/tidb/parser v0.0.0-20221126021158-6b02a5d8ba7d
 	github.com/rs/zerolog v1.29.1
-	github.com/yangyin5127/ploto v0.6.1
-
+	github.com/yangyin5127/ploto v0.7.0
 )
 
 require (
@@ -65,7 +64,7 @@ require (
 	github.com/tikv/pd/client v0.0.0-20220307081149-841fa61e9710 // indirect
 	github.com/uber/jaeger-client-go v2.22.1+incompatible // indirect
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
-	github.com/yangyin5127/sqlstring v0.3.1 // indirect
+	github.com/yangyin5127/sqlstring v0.4.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
