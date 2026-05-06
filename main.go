@@ -19,14 +19,18 @@ import (
 	_ "github.com/pingcap/tidb/types/parser_driver"
 )
 
-var Version = "1.7.1"
+var (
+	Version   = "1.7.2"
+	GitCommit = "unknown"
+	BuildTime = "unknown"
+)
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "go-binlog-kafka version: %s\n\nUsage:\n", Version)
+		fmt.Fprintf(os.Stderr, "go-binlog-kafka version: %s (commit: %s, built: %s)\n\nUsage:\n", Version, GitCommit, BuildTime)
 		flag.PrintDefaults()
 	}
 
@@ -56,7 +60,7 @@ func main() {
 	flag.Parse()
 
 	if *showVersion {
-		fmt.Println("go-binlog-kafka version:", Version)
+		fmt.Printf("go-binlog-kafka version: %s\ncommit:     %s\nbuilt:      %s\n", Version, GitCommit, BuildTime)
 		os.Exit(0)
 	}
 

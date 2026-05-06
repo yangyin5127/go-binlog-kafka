@@ -117,3 +117,12 @@ CREATE TABLE `binlog_info` (
   UNIQUE KEY `uniq_ix` (`instance_name`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 ```
+
+
+## Release
+
+```
+GOOS=linux GOARCH=amd64 go build -ldflags "-X main.GitCommit=$(git rev-parse --short HEAD) -X main.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+GOOS=windows GOARCH=amd64 go build -ldflags "-X main.GitCommit=$(git rev-parse --short HEAD) -X main.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+* GOOS=darwin GOARCH=amd64 go build -ldflags "-X main.GitCommit=$(git rev-parse --short HEAD) -X main.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+```
