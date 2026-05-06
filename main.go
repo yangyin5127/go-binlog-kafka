@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"fmt"
 	"os"
 	"os/signal"
 	"strings"
@@ -18,10 +19,18 @@ import (
 	_ "github.com/pingcap/tidb/types/parser_driver"
 )
 
+var Version = "1.7.1"
+
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "go-binlog-kafka version: %s\n\nUsage:\n", Version)
+		flag.PrintDefaults()
+	}
+
+	showVersion := flag.Bool("v", false, "Print version and exit")
 	dbInstanceName := flag.String("db_instance_name", "", "Database instance name")
 	kafkaTopicName := flag.String("kafka_topic_name", "", "Kafka topic name")
 	kafkaAddr := flag.String("kafka_addr", "", "Kafka address")
@@ -45,6 +54,11 @@ func main() {
 	flushInterval := flag.Int("flush_interval", 5, "file flush interval in seconds, default 5")
 
 	flag.Parse()
+
+	if *showVersion {
+		fmt.Println("go-binlog-kafka version:", Version)
+		os.Exit(0)
+	}
 
 	kafkaAddress := strings.Split(*kafkaAddr, ",")
 	isSingleMode := *pushMsgMode == "single"
