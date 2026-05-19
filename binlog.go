@@ -7,6 +7,7 @@ type RowData struct {
 	Table      string `json:"table"`
 	Gtid       string `json:"gtid"`
 	Timestamp  uint32 `json:"timestamp"`
+	ServerID   uint32 `json:"server_id"`
 	Schema     string `json:"schema"`
 	// insert
 	Values map[string]interface{} `json:"values,omitempty"`

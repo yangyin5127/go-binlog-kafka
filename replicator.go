@@ -90,6 +90,7 @@ func (r *Replicator) Run(ctx context.Context) error {
 
 		event := ev.Header.EventType
 		rowData.Timestamp = ev.Header.Timestamp
+		rowData.ServerID = ev.Header.ServerID
 
 		switch event {
 		case replication.WRITE_ROWS_EVENTv2, replication.WRITE_ROWS_EVENTv1:
