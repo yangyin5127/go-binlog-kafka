@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	"github.com/yangyin5127/go-binlog-kafka/logger"
 )
 
